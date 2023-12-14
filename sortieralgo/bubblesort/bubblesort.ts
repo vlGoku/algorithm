@@ -4,9 +4,9 @@ function bubbleSort(array: number[]): number[] {
     for (let i = n - 1; i > 0; i--) {
         for (let j = 0; j < i; j++) {
             if (array[j] > array[j + 1]) {
-                const temp = array[j];
+                const temporary = array[j];
                 array[j] = array[j + 1];
-                array[j + 1] = temp;
+                array[j + 1] = temporary;
             }
         }
     }
