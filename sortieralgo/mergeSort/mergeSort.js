@@ -1,7 +1,8 @@
+"use strict";
 function merge(arr1, arr2) {
-    var sortedArray = [];
-    var i = 0;
-    var j = 0;
+    const sortedArray = [];
+    let i = 0;
+    let j = 0;
     //sorted Array
     //[1, 3, 5, 7] [2, 4, 6, 8]
     //[1, 2, 3, 4,...]
@@ -29,10 +30,11 @@ function mergeSort(arr) {
     if (arr.length <= 1) {
         return arr;
     }
-    var middle = Math.floor(arr.length / 2);
-    var newArr1 = mergeSort(arr.slice(0, middle));
-    var newArr2 = mergeSort(arr.slice(middle, arr.length));
+    let middle = Math.floor(arr.length / 2);
+    let newArr1 = mergeSort(arr.slice(0, middle));
+    let newArr2 = mergeSort(arr.slice(middle, arr.length));
     return merge(newArr1, newArr2);
 }
-var unsortedArray = [1, 4, 7, 8, 2, 5, 3, 6, 9, 12, 11];
+let unsortedArray = [1, 4, 7, 8, 2, 5, 3, 6, 9, 12, 11];
 console.log(mergeSort(unsortedArray));
+//# sourceMappingURL=mergeSort.js.map
