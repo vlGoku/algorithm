@@ -30,6 +30,7 @@ const myList = new SinglyLinkedList();
 myList.append(5);
 myList.append(7);
 myList.append(12);
+myList.append(34);
 console.log(myList);
 /* const head = new ListNode(5);
 head.next = new ListNode(10);
