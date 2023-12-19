@@ -12,6 +12,7 @@ class SinglyLinkedList {
         this.tail = null;
         this.length = 0;
     }
+    //Add Item at the end of the list
     append(value) {
         const listNodeValue = new ListNode(value);
         if (this.length === 0) {
@@ -25,14 +26,35 @@ class SinglyLinkedList {
         this.length++;
         return this;
     }
+    //remove last item and set new tail
+    pop() {
+        if (this.head === null) {
+            return undefined;
+        }
+        let pre = null;
+        let temp = this.head;
+        if (!this.head.next) {
+            this.head = null;
+            this.tail = null;
+            this.length--;
+            return temp;
+        }
+        while (temp.next) {
+            pre = temp;
+            temp = temp.next;
+        }
+        this.tail = pre;
+        this.tail.next = null;
+        this.length--;
+        return temp;
+    }
 }
 const myList = new SinglyLinkedList();
 myList.append(5);
-myList.append(7);
-myList.append(12);
-myList.append(34);
+myList.pop();
 console.log(myList);
 /* const head = new ListNode(5);
 head.next = new ListNode(10);
 head.next.next = new ListNode(20);
-console.log(head); */ 
+console.log(head); */
+//# sourceMappingURL=singleLinkedList.js.map
