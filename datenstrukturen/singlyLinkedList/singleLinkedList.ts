@@ -134,7 +134,7 @@ class SinglyLinkedList {
 
   //reverse the list
   reverse() {
-    let currentHead = this.head;
+    /*     let currentHead = this.head;
     let next = null;
     let prev = null;
 
@@ -148,6 +148,17 @@ class SinglyLinkedList {
     this.tail = this.head;
     this.head = prev;
     this.tail!.next = null;
+    return this; */
+    let node = this.head as ListNode | null;
+    this.head = this.tail;
+    let next = null as ListNode | null;
+    let prev = null as ListNode | null;
+    while (node !== null) {
+      next = node!.next;
+      node!.next = prev;
+      prev = node;
+      node = next;
+    }
     return this;
   }
 }
