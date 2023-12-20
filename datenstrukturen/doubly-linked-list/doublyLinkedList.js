@@ -75,6 +75,5 @@ myList.append(5);
 myList.append(15);
 myList.append(25);
 myList.append(35);
-myList.unshift(2);
 console.log(myList);
 //# sourceMappingURL=doublyLinkedList.js.map
