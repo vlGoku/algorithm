@@ -1,4 +1,5 @@
 "use strict";
+var _a;
 class ListNode {
     constructor(val) {
         this.next = null;
@@ -11,10 +12,6 @@ class DoublyLinkedList {
         this.head = null;
         this.tail = null;
         this.length = 0;
-        //change the value of a node item with a specific index
-        //set
-        //add node on a specific index
-        //insert
         //removes node on a specific index
         //remove
         //reverse the list
@@ -86,7 +83,7 @@ class DoublyLinkedList {
         let counter = 0;
         let currentNode = null;
         let middle = Math.floor(this.length / 2);
-        if (index < middle) {
+        if (index <= middle) {
             currentNode = this.head;
             while (counter !== index) {
                 currentNode = currentNode === null || currentNode === void 0 ? void 0 : currentNode.next;
@@ -101,7 +98,35 @@ class DoublyLinkedList {
                 counter--;
             }
         }
-        return currentNode === null || currentNode === void 0 ? void 0 : currentNode.value;
+        return currentNode;
+    }
+    //change the value of a node item with a specific index
+    set(value, index) {
+        let currentNode = this.get(index);
+        if (currentNode == undefined) {
+            return false;
+        }
+        else {
+            currentNode.value = value;
+        }
+        return true;
+    }
+    //add node on a specific index
+    insert(value, index) {
+        if (index < 0 || index >= this.length)
+            return false;
+        if (index === 0)
+            return this.unshift(value);
+        if (index == this.length)
+            return this.append(value);
+        let prevNode = this.get(index - 1);
+        let currentNode = prevNode.next;
+        let newNode = new ListNode(value);
+        prevNode.next = newNode;
+        newNode.next = currentNode;
+        newNode.prev = prevNode;
+        this.length++;
+        return true;
     }
 }
 const myList = new DoublyLinkedList();
@@ -109,8 +134,8 @@ myList.append(5);
 myList.append(15);
 myList.append(25);
 myList.append(35);
-myList.append(45);
 myList.append(55);
 myList.append(65);
-console.log(myList.get(0));
+myList.insert(45, 4);
+console.log((_a = myList.get(4)) === null || _a === void 0 ? void 0 : _a.value);
 //# sourceMappingURL=doublyLinkedList.js.map
