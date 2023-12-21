@@ -85,7 +85,7 @@ class DoublyLinkedList<T> {
       }
     } else {
       currentNode = this.tail;
-      counter = this.length;
+      counter = this.length - 1;
       while (counter !== index) {
         currentNode = currentNode?.prev as ListNode<T>;
         counter--;
@@ -116,4 +116,4 @@ myList.append(35);
 myList.append(45);
 myList.append(55);
 myList.append(65);
-console.log(myList.get(4));
+console.log(myList.get(0));

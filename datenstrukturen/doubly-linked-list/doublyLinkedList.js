@@ -95,7 +95,7 @@ class DoublyLinkedList {
         }
         else {
             currentNode = this.tail;
-            counter = this.length;
+            counter = this.length - 1;
             while (counter !== index) {
                 currentNode = currentNode === null || currentNode === void 0 ? void 0 : currentNode.prev;
                 counter--;
@@ -112,5 +112,5 @@ myList.append(35);
 myList.append(45);
 myList.append(55);
 myList.append(65);
-console.log(myList.get(4));
+console.log(myList.get(0));
 //# sourceMappingURL=doublyLinkedList.js.map
