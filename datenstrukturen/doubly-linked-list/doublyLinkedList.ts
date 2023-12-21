@@ -28,6 +28,7 @@ class DoublyLinkedList<T> {
     return this;
   }
 
+  //remove last item and set new tail
   pop() {
     if (this.head === null) return undefined;
     let currentTail = this.tail;
@@ -41,6 +42,7 @@ class DoublyLinkedList<T> {
     return currentTail;
   }
 
+  //remove the first item of the list
   shift() {
     if (this.length === 0) return undefined;
     let currentHead = this.head;
@@ -55,6 +57,7 @@ class DoublyLinkedList<T> {
     return currentHead;
   }
 
+  //add item at the beginning of the list
   unshift(value: T) {
     let newNode = new ListNode(value);
     if (this.length === 0) {
@@ -68,7 +71,40 @@ class DoublyLinkedList<T> {
     return this;
   }
 
-  get(index: number) {}
+  //get a node from specific index
+  get(index: number) {
+    if (index < 0 || index >= this.length) return null;
+    let counter = 0;
+    let currentNode = null;
+    let middle = Math.floor(this.length / 2);
+    if (index < middle) {
+      currentNode = this.head;
+      while (counter !== index) {
+        currentNode = currentNode?.next as ListNode<T>;
+        counter++;
+      }
+    } else {
+      currentNode = this.tail;
+      counter = this.length;
+      while (counter !== index) {
+        currentNode = currentNode?.prev as ListNode<T>;
+        counter--;
+      }
+    }
+    return currentNode?.value;
+  }
+
+  //change the value of a node item with a specific index
+  //set
+
+  //add node on a specific index
+  //insert
+
+  //removes node on a specific index
+  //remove
+
+  //reverse the list
+  //reverse
 }
 
 const myList = new DoublyLinkedList<number>();
@@ -77,4 +113,7 @@ myList.append(5);
 myList.append(15);
 myList.append(25);
 myList.append(35);
-console.log(myList);
+myList.append(45);
+myList.append(55);
+myList.append(65);
+console.log(myList.get(4));
