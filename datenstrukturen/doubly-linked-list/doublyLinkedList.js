@@ -1,5 +1,4 @@
 "use strict";
-var _a;
 class ListNode {
     constructor(val) {
         this.next = null;
@@ -12,10 +11,6 @@ class DoublyLinkedList {
         this.head = null;
         this.tail = null;
         this.length = 0;
-        //removes node on a specific index
-        //remove
-        //reverse the list
-        //reverse
     }
     //Add Item at the end of the list
     append(value) {
@@ -128,14 +123,36 @@ class DoublyLinkedList {
         this.length++;
         return true;
     }
+    //removes node on a specific index
+    remove(index) {
+        var _a, _b;
+        if (index < 0 || index > this.length)
+            return undefined;
+        if (index === 0)
+            return (_a = this.shift()) === null || _a === void 0 ? void 0 : _a.value;
+        if (index === this.length)
+            return (_b = this.pop()) === null || _b === void 0 ? void 0 : _b.value;
+        let toDeleteNode = this.get(index);
+        if (index > 0 && index < this.length) {
+            let prevNode = toDeleteNode === null || toDeleteNode === void 0 ? void 0 : toDeleteNode.prev;
+            let nextNode = toDeleteNode === null || toDeleteNode === void 0 ? void 0 : toDeleteNode.next;
+            prevNode.next = nextNode;
+            nextNode.prev = prevNode;
+            toDeleteNode.next = null;
+            toDeleteNode.prev = null;
+        }
+        this.length--;
+        return toDeleteNode === null || toDeleteNode === void 0 ? void 0 : toDeleteNode.value;
+    }
 }
 const myList = new DoublyLinkedList();
 myList.append(5);
 myList.append(15);
 myList.append(25);
 myList.append(35);
+myList.append(45);
 myList.append(55);
 myList.append(65);
-myList.insert(45, 4);
-console.log((_a = myList.get(4)) === null || _a === void 0 ? void 0 : _a.value);
+myList.remove(1);
+console.log(myList);
 //# sourceMappingURL=doublyLinkedList.js.map

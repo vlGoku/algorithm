@@ -121,10 +121,22 @@ class DoublyLinkedList<T> {
   }
 
   //removes node on a specific index
-  //remove
-
-  //reverse the list
-  //reverse
+  remove(index: number) {
+    if (index < 0 || index > this.length) return undefined;
+    if (index === 0) return this.shift()?.value;
+    if (index === this.length) return this.pop()?.value;
+    let toDeleteNode = this.get(index);
+    if (index > 0 && index < this.length) {
+      let prevNode = toDeleteNode?.prev;
+      let nextNode = toDeleteNode?.next;
+      prevNode!.next = nextNode as ListNode<T>;
+      nextNode!.prev = prevNode as ListNode<T>;
+      toDeleteNode!.next = null;
+      toDeleteNode!.prev = null;
+    }
+    this.length--;
+    return toDeleteNode?.value;
+  }
 }
 
 const myList = new DoublyLinkedList<number>();
@@ -133,7 +145,8 @@ myList.append(5);
 myList.append(15);
 myList.append(25);
 myList.append(35);
+myList.append(45);
 myList.append(55);
 myList.append(65);
-myList.insert(45, 4);
-console.log(myList.get(4)?.value);
+myList.remove(1);
+console.log(myList);
