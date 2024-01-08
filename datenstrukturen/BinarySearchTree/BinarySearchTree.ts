@@ -20,6 +20,72 @@ class BinarySearchTree<T> {
     node.right = this.buildTree(myData, mid + 1, end);
     return (this.root = node);
   }
+
+  insertIterative(val: T) {
+    const newNode = new TreeNode<T>(val);
+    if (!this.root) return (this.root = newNode);
+    let current = this.root;
+    while (true) {
+      if (val === current.value) return;
+      if (val < current.value) {
+        if (!current.left) {
+          return (current.left = newNode);
+        }
+        current = current.left;
+      }
+      if (val > current.value) {
+        if (!current.right) {
+          return (current.right = newNode);
+        }
+        current = current.right;
+      }
+    }
+  }
+
+  insertRec(val: T) {
+    const check = (node: TreeNode<T>) => {
+      if (node.value === val) return;
+      if (node.value > val) {
+        check((node.left = node.left ?? new TreeNode<T>(val)));
+      }
+      if (node.value < val) {
+        check((node.right = node.right ?? new TreeNode<T>(val)));
+      }
+    };
+    check((this.root = this.root ?? new TreeNode<T>(val)));
+  }
+
+  //TODO find method
+
+  breadthFirst() {
+    let node = this.root;
+    const queue = [];
+    const visited: T[] = [];
+    queue.push(node);
+    while (queue.length) {
+      node = queue.shift() as TreeNode<T>;
+      visited.push(node?.value);
+      if (node?.left) queue.push(node?.left);
+      if (node?.right) queue.push(node?.right);
+    }
+
+    return visited;
+  }
+
+  preOrder() {
+    const visited: T[] = [];
+    const search: any = (node: TreeNode<T>) => {
+      visited.push(node.value);
+      if (node.left) search(node.left);
+      if (node.right) search(node.right);
+    };
+    search(this.root as TreeNode<T>);
+    return visited;
+  }
+
+  //TODO InOrder
+  //TODO PostOrder
+  //TODO Height
 }
 
 function prettyPrint(node: TreeNode<number>, prefix = "", isLeft = true) {
@@ -35,5 +101,11 @@ function prettyPrint(node: TreeNode<number>, prefix = "", isLeft = true) {
 const data = [5, 10, 21, 87, 301, 350];
 const tree = new BinarySearchTree();
 tree.buildTree(data);
+tree.insertIterative(5);
+tree.insertIterative(10);
+tree.insertIterative(2);
+tree.insertIterative(9);
+tree.insertIterative(1);
+tree.insertIterative(3);
 prettyPrint(tree.root as TreeNode<number>);
 console.log(tree);
