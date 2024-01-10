@@ -23,7 +23,7 @@ class WeightedGraph {
                 .get(vertex1)
                 ?.push({ node: vertex2, edge: weight });
             this.adjacencyList
-                .get(vertex1)
+                .get(vertex2)
                 ?.push({ node: vertex1, edge: weight });
         }
     }
@@ -95,3 +95,4 @@ dijkstraGraph.addEdge("D", "E", 3);
 dijkstraGraph.addEdge("E", "F", 1);
 console.log(dijkstraGraph.adjacencyList);
 console.log(dijkstraGraph.dijkstraSearch("A", "E"));
+//# sourceMappingURL=dijkstra.js.map

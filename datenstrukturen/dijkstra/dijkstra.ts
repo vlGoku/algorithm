@@ -25,7 +25,7 @@ class WeightedGraph<T, U> {
         .get(vertex1)
         ?.push({ node: vertex2, edge: weight } as Edge<T, U>);
       this.adjacencyList
-        .get(vertex1)
+        .get(vertex2)
         ?.push({ node: vertex1, edge: weight } as Edge<T, U>);
     }
   }
