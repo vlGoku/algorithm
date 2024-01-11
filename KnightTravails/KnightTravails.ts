@@ -1,7 +1,13 @@
 type Queue = { current: number[]; path: number[] };
 
 class Knight {
-  possibleMoves: number[][] = [
+  private possibleMoves: number[][];
+  private queue: {possibleMove: number[]; currentPath: number[]}[] = []
+  private visited = new Set();
+  private path: number [] | number[][] = []
+
+  constructor(){
+  this.possibleMoves = [
     [2, 1],
     [2, -1],
     [-2, -1],
@@ -11,8 +17,38 @@ class Knight {
     [-1, 2],
     [-1, -2],
   ];
+}
 
-  move(start: number[], end: number[]) {
+  checkIfInField(pos: number[]) {
+    return pos[0] >= 0 && pos[0] < 8 && pos[1] >= 0 && pos[1] < 8;
+  }
+
+  //BFS
+  moves(start: number[], end: number[]){
+    this.visited.add(start);
+    this.queue.push({ possibleMove: start, currentPath: start});
+    let currentData: { possibleMove: number[]; currentPath: number[]};
+    let next: number[];
+    while(this.queue.length){
+      currentData = this.queue.shift()!;
+      if(currentData.possibleMove[0] === end[0] && currentData.possibleMove[1] === end[1]){
+        this.path = currentData.currentPath;
+        break;
+      }
+
+      this.possibleMoves.forEach(move => {
+        next = [currentData.possibleMove[0]! + move[0], currentData.possibleMove[1] + move[1],];
+        if(this.checkIfInField(next)){
+          this.visited.add(next);
+          this.queue.push({
+            possibleMove: next,
+            currentPath: currentData.currentPath.concat(next),
+          })
+        }
+      });
+    }
+  }
+/*   move(start: number[], end: number[]) {
     let newX: number;
     let newY: number;
     let currentPos: Queue;
@@ -44,16 +80,8 @@ class Knight {
         //Abbruch
       }
     }
+  } */
   }
-
-  checkIfInField(x: number, y: number): boolean {
-    if (x >= 0 && x < 8 && y >= 0 && y < 8) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-}
 
 class Gameboard<T> {
   adjacencyList = new Map();
@@ -61,4 +89,3 @@ class Gameboard<T> {
 
 const knight = new Knight();
 const gameboard = new Gameboard<number>();
-knight.move([1, 3], [1, 1]);
